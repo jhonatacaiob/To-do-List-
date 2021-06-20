@@ -11,7 +11,7 @@ def index(request):
         context = {
             'tarefas': Tarefa.objects.all()
         }
-        return render(request, 'tarefas/tarefas.html', context)
+        return render(request, 'tarefas.html', context)
 
 
 
@@ -24,7 +24,7 @@ def cadastro(request):
             'form': form,
             'tarefas': tarefas
         }
-        return render(request, 'tarefas/cadastro.html', context)
+        return render(request, 'cadastro.html', context)
 
 
     elif(str(request.method) == 'POST'):
@@ -37,7 +37,7 @@ def cadastro(request):
         else:
 
             form = TarefaModelForm()
-            return render(request, 'tarefas/cadastro.html')
+            return render(request, 'cadastro.html')
 
 def atualizar(request, id):
     tarefas = Tarefa.objects.all()
@@ -49,7 +49,7 @@ def atualizar(request, id):
             'form': form,
             'id': id,
         }
-        return render(request, 'tarefas/atualizar.html', context)
+        return render(request, 'atualizar.html', context)
 
     elif(str(request.method) == 'POST'):
         if(form.is_valid()):
