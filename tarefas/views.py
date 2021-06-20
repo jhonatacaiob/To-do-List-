@@ -1,13 +1,10 @@
 from django.shortcuts import redirect, render
 from .models import Tarefa
 from .forms import TarefaModelForm
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 
 
 
 # Create your views here.
-@login_required
 def index(request):
     if(str(request.method) == 'GET'):
         tarefas = Tarefa.objects.all()
@@ -18,7 +15,6 @@ def index(request):
 
 
 
-@login_required
 def cadastro(request):
     tarefas = Tarefa.objects.all()
     if(str(request.method) == 'GET'):
@@ -43,7 +39,6 @@ def cadastro(request):
             form = TarefaModelForm()
             return render(request, 'tarefas/cadastro.html')
 
-@login_required
 def atualizar(request, id):
     tarefas = Tarefa.objects.all()
     form = TarefaModelForm(request.POST or None, instance = Tarefa.objects.get(pk = id))
@@ -62,7 +57,6 @@ def atualizar(request, id):
         return redirect(to='index')
 
 
-@login_required
 def excluir(request, id):
     tarefa = Tarefa.objects.get(pk = id)
     tarefa.delete()
